@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="utf-8">
+ <link rel="stylesheet" href="style.css"/>
+ <title>jquery-2</title>
+</head>
+<body>
+  <label for="nom"></label><input type="text" name="square" value="" id="titre" />
+ <div id="rectangle"></div>
+ <script
+ src="https://code.jquery.com/jquery-2.2.4.min.js"
+ integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+ crossorigin="anonymous">
+ </script>
+ <script>
+ $(function(){
+   //je déclare 2 variables dans lesquels je donne la hauteur et la largeur de la fenêtre au chargement de la page
+   var largeur_fenetre = $(window).width();
+   var hauteur_fenetre = $(window).height();
+   //quand je clique sur le formulaire je récupère valeur imput et la fonction démarre
+   $('#titre').keyup(function(e){
+     //je déclare 2 variables pour récupérer la position du carré (haut et gauche)
+     var top = $('#rectangle').offset().top;
+     var left = $('#rectangle').offset().left;
+     //sert à contrôler dans le firebug la position réelle du carré
+     console.log($('#rectangle').offset());
+     //je déclare la condition switch (selon la touche pressée)
+     switch (e.keyCode){
+       //la touche 39 qui correspond à la flèche sur le clavier droite
+       case 39:
+       // si le coté gauche du carré n'est pas au bord droit de la fenetre
+       if (left < (largeur_fenetre-200)){
+         //alors on deplace le carré vers la droite
+         $('#rectangle').css('margin-left', '+=10');
+       }
+       //sinon si le coté gauche du carré arrive au bord droit de la fenetre
+       else{
+         //alors on remet le carré à gauche
+         $('#rectangle').css('margin-left','0');
+       }
+       break;
+       case 37:
+
+       if(left>0){
+         $('#rectangle').css('margin-left', '-=10');
+       }
+       else{
+         $('#rectangle').css('margin-left',largeur_fenetre-200);
+       }
+       break;
+       case 40:
+       if(top < (hauteur_fenetre-200)){
+         $('#rectangle').css('margin-top', '+=10');
+       }
+       else{
+         $('#rectangle').css('margin-top','0');
+       }
+       break;
+       case 38:
+       if(top>0){
+         $('#rectangle').css('margin-top', '-=10');
+       }
+       else{
+         $('#rectangle').css('margin-top',hauteur_fenetre-200);
+       }
+       default:
+     }
+     /*si j'appuie sur  KeyCode de la touche flèche droite
+     if(e.keyCode == 39) {
+     //je veux que le style de mon carré part à gauche
+     $('#rectangle').css('margin-left', '+=10');
+   }
+   if(e.keyCode == 37){
+   //si j'appuie sur  KeyCode de la touche flèche gauche
+   $('#rectangle').css('margin-left', '-=10');
+ }
+ //si j'appuie sur  KeyCode de la touche flèche bas
+ if(e.keyCode == 40){
+ $('#rectangle').css('margin-top', '+=10');
+}
+//si j'appuie sur  KeyCode de la touche flèche haut
+if(e.keyCode == 38){
+$('#rectangle').css('margin-top', '-=10');
+}else{
+}*/
+});
+});
+/*Construisez une page html avec un carré et un champ de saisie de texte dans un formulaire.
+Lorsque l'on appuie sur une touche de direction le carré se déplace de 10 px dans la bonne direction.
+Quand le bloc atteint un bord de la page, il doit réaparaître de l'autre côté.*/
+</script>
+</body>
+</html>
